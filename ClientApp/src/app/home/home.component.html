@@ -1,0 +1,13 @@
+<mat-progress-bar class="loader-bar" mode="indeterminate"
+    *ngIf="loaderService.loadingSubject | async"></mat-progress-bar>
+<div class="main-layout">
+    <div class="main-navber-box">
+        <app-side-bar></app-side-bar>
+    </div>
+    <div class="main-content-area">
+        <app-top-bar></app-top-bar>
+        <div class="wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="side-navbar-sec">
+  <div class="logo-box">
+    <a [routerLink]="['/']"> <img src="assets/images/codeZen_Logo.svg" alt=""> </a>
+  </div>
+  <nav class="nav-link-box">
+    <ng-container *ngFor="let menu of menuData">
+      <a class="nav-link" [routerLink]="menu.route" routerLinkActive="active" *ngIf="!menu.items?.length">
+        <i class="nav-icon fas fa-xl {{menu.icon}}"></i>
+        <span class="nav-text">{{menu.name}}</span>
+      </a>
+      <div class="main-nav-link" (mouseenter)="showSubMenu($event)" *ngIf="menu.items?.length> 0">
+        <div class="nav-link" routerLinkActive="active">
+          <i class="nav-icon fas fa-xl {{menu.icon}}"></i>
+          <span class="nav-text">{{menu.name}}</span>
+          <div class="sub-nav-link">
+            <div class="nav-link-item-wrapper">
+              <div class="nav-link-item" *ngFor="let subMenu of menu.items">
+                <a class="sub-nav-text" routerLinkActive="active" [routerLink]="subMenu.route"><i
+                    class="fas {{subMenu.icon}} mr10"></i>{{subMenu.name}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </nav>
+</div>

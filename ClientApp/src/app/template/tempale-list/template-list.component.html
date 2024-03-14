@@ -1,0 +1,129 @@
+<div class="main-left-list-sec patient-list-sec">
+    <div class="list-sec-top-bar d-flex justify-content-between">
+        <h1 class="font-section-title-medium">{{sentenceCaseEntityName}}</h1>
+        <button mat-button class="ec-primary-btn add-invoice-btn" (click)='addRecord()'>
+            <span class="material-icons icon-btn">add</span>Add {{entityName}}
+        </button>
+    </div>
+    <div class="list-sec-search">
+        <div class="search-wrapper">
+            <div class="search-icon">
+                <img src="assets/images/icons/search.svg" width="20" height="20" alt="search">
+            </div>
+            <div class="search-input">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="filter-icon" (click)="openFilterPanel()">
+                <img src="assets/images/icons/filter.svg" width="20" height="20" alt="filter">
+            </div>
+            <div class="filter-panel" *ngIf="showFilterPanel">
+                <div class="filter-data">
+                    <div class="filter-data-item">
+                        <p class="filter-text">Chetan Bhagat</p>
+                        <a><mat-icon aria-label="Delete">close</mat-icon></a>
+                    </div>
+                    <div class="filter-data-item">
+                        <p class="filter-text">Fiction</p>
+                        <a><mat-icon aria-label="Delete">close</mat-icon></a>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="form-group row-item-full">
+                        <mat-form-field class="input-form-field" appearance="fill">
+                            <mat-label>Author</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let item of authors" [value]="item">
+                                    {{item.text}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group row-item-full">
+                        <mat-form-field class="input-form-field" appearance="fill">
+                            <mat-label>Genre</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let item of genre" [value]="item">
+                                    {{item.text}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group row-item-full">
+                        <mat-form-field class="input-form-field" appearance="fill">
+                            <mat-label>Publication</mat-label>
+                            <mat-select>
+                                <mat-option *ngFor="let item of publication" [value]="item">
+                                    {{item.text}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="filter-bottom">
+                        <div class="btn-wrapper">
+                            <button mat-button class="ec-primary-btn">Search</button>
+                            <button mat-button class="ec-cancel-btn" (click)="clearFilter()">Cancel</button>
+                        </div>
+                        <span class="search-results ec-badge-green">8 results</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="list-sec-scroll-wrapper">
+        <div class="patient-list-box">
+            <div *ngIf="mappedData && mappedData.length > 0; else noDataFoundSection">
+                <div class="list-card-item patient-list-item" *ngFor="let record of mappedData; let i=index;"
+                    (click)="previewSpecificRecord(i)" [ngClass]="{'card-active': i===selectedIndex}" id="div-{{i}}">
+                    <div class="list-card-item-content flex-nowrap">
+                        <ng-container *ngFor="let title of record.cardTitle?.fields">
+                            <div *ngIf="title.value"
+                                class="d-flex justify-content-between align-items-start w-100 mb-3">
+                                <h4 class="font-title-medium tuncate-text">{{ title.value }}</h4>
+                                <div class="action-button-container">
+                                    <button mat-icon-button [matMenuTriggerFor]="action" class="action-button">
+                                        <mat-icon aria-label="action" matTooltip="Action">more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #action="matMenu">
+                                        <button mat-menu-item class="delete-button" color="warn"
+                                            (click)="confirmDelete(record.id)">
+                                            <mat-icon aria-label="Delete">close</mat-icon>
+                                            Delete
+                                        </button>
+                                    </mat-menu>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container *ngFor="let detail of record.cardDetail?.fields">
+                            <div *ngIf="detail.value" class="details-area">
+                                <span *ngIf="!detail.icon" class="font-body-medium color-font-primary me-2">{{
+                                    detail.label }}:</span>
+                                <i *ngIf="detail.icon" class="fas {{detail.icon}} mr10"></i>
+                                <span class="font-title-xs fw-normal color-font-secondary">{{ detail.value}}</span>
+                            </div>
+                        </ng-container>
+                        <div class="row status-area">
+                            <ng-container *ngFor="let status of record.cardStatus?.fields; let j=index;">
+                                <div *ngIf="status.value"
+                                    class="col-md-{{record.cardStatus?.fields?.length-1===j && j%2===0?12:6}}">
+                                    <div *ngIf="!status.icon" class="font-body-medium color-font-primary">{{
+                                        status.label }}</div>
+                                    <i *ngIf="status.icon" class="fas {{status.icon}} mr10"></i>
+                                    <span class="font-title-xs fw-normal color-font-secondary">{{ status.value }}</span>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noDataFoundSection>
+                <div class="no-data-section mt-4">
+                    <img src="assets/images/icons/no-data-found.svg" width="220" height="220" alt="No data found" />
+                    <p class="font-title-xs fw-normal color-font-secondary">No data found.</p>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

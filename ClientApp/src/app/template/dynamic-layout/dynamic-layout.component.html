@@ -1,0 +1,58 @@
+<div class="dynamic-layout-container container-fluid">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-6" *ngFor="let field of formFields">
+                <ng-container [ngSwitch]="field.type">
+                    <!-- Section -->
+                    <div *ngSwitchCase="'section'" class="section">
+                        <h4><i *ngIf="field.icon" class="fas {{field.icon}} mr10"></i>{{field.name}}</h4>
+                        <app-dynamic-layout [form]="form" [formFields]="field.fields"
+                            [fieldOptions]="fieldOptions"></app-dynamic-layout>
+                    </div>
+
+                    <ng-container *ngSwitchDefault>
+                        <!-- Inputs starts here -->
+                        <div [ngSwitch]="field.dataType">
+                            <!-- Textbox -->
+                            <mat-form-field *ngSwitchDefault class="input-form-field">
+                                <mat-label>{{field.label}}</mat-label>
+                                <input matInput [formControlName]="field.fieldName" [required]="field.required">
+                            </mat-form-field>
+
+                            <!-- Date -->
+                            <mat-form-field *ngSwitchCase="'datetime'" class="input-form-field">
+                                <mat-label>{{field.label}}</mat-label>
+                                <input matInput [formControlName]="field.fieldName" [matDatepicker]="picker"
+                                    [required]="field.required">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+
+                            <!-- Dropdown -->
+                            <mat-form-field *ngSwitchCase="'guid'" class="input-form-field">
+                                <mat-label>{{field.label}}</mat-label>
+                                <mat-select [formControlName]="field.fieldName" [required]="field.required">
+                                    <mat-option [value]="null">Select</mat-option>
+                                    <mat-option *ngFor="let option of fieldOptions[field.fieldName]"
+                                        [value]="option.value">{{ option.text }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <!-- Radio -->
+                            <div *ngSwitchCase="'boolean'" class="form-group row-item-half">
+                                <p>{{field.label}}</p>
+                                <mat-radio-group name="field.fieldName" [formControlName]="field.fieldName"
+                                    [attr.required]="field.required">
+                                    <mat-radio-button *ngFor="let option of fieldOptions[field.fieldName]"
+                                        [value]="option.value">{{ option.text }}</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                        <!-- Inputs ends here -->
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+    </form>
+</div>

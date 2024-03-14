@@ -1,0 +1,162 @@
+.main-left-list-sec {
+    padding: 0px 0px 0px 34px;
+    padding-top: 25px;
+    border-right: 1px solid var(--border-color-dark);
+
+    .main-left-list-sec .list-sec-top-bar {
+        padding-top: 25px;
+    }
+
+    .search-box-sec {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        z-index: 11;
+    }
+
+    .list-sec-scroll-wrapper {
+        width: calc(100% + 9px);
+        height: calc(100vh - 175px);
+        overflow-y: scroll;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: rgb(237, 237, 237) transparent;
+    }
+}
+
+.users-bs-details {
+    margin-top: 4px;
+}
+
+.users-footer-details {
+    display: flex;
+    margin-top: 10px;
+}
+
+
+.add-invoice-btn {
+    margin-right: 35px;
+}
+
+.details-text {
+    line-height: 24px;
+}
+
+.list-card-item-content {
+
+    .action-button-container {
+        margin-right: -10px;
+
+        .action-button {
+            .mat-icon {
+                font-size: 17px !important;
+
+            }
+        }
+    }
+
+    .status-area {
+        margin-top: 0px;
+    }
+}
+
+.no-data-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list-card-item {
+    position: relative;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color-dark);
+    padding: 15px;
+    margin-right: 35px;
+    border-radius: 5px;
+    position: relative;
+
+    .search-icon {
+        margin-right: 10px;
+    }
+}
+
+.search-input {
+    flex: 1;
+
+    input {
+        border: none;
+        font-size: 14px;
+    }
+}
+
+.filter-icon {
+    cursor: pointer;
+}
+
+.filter-panel {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    background-color: var(--main-bg);
+    border: 1px solid var(--border-color-dark);
+    box-shadow: rgba(0, 0, 0, 0) 0px 2px 4px, rgba(0, 0, 0, 0.1) 0px 2px 6px;
+    padding: 25px 15px 25px 15px;
+    z-index: 999;
+
+    .filter-data {
+        margin: 0px 15px 20px 0px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .filter-data-item {
+            border: 1px solid var(--primary-color);
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 20px;
+
+            .filter-text {
+                color: var(--primary-link-color);
+                font-weight: 500;
+            }
+
+            a {
+                text-align: right;
+                display: flex;
+                width: 20px;
+                height: 20px;
+                padding-top: 2px;
+            }
+        }
+
+        .material-icons {
+            font-size: 16px;
+            color: var(--color-4);
+        }
+    }
+
+    .input-form-field.mat-mdc-form-field {
+        display: block;
+        margin-bottom: 0px;
+    }
+
+    .filter-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .search-results {
+            font-size: 13px;
+            padding: 5px 10px;
+            font-weight: 500;
+        }
+    }
+}
